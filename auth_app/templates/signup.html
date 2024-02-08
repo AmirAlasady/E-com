@@ -1,0 +1,101 @@
+{% extends "auth_base.html" %}
+{% block title %}Sign up{% endblock title %}
+
+
+
+{% block hero %}
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    .signup-container {
+      width: 500px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .signup-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .signup-label {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .signup-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+
+    .signup-button {
+      background-color: #c93a57;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .signup-button:hover {
+      background-color: #d17587;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+  <div class="signup-container">
+
+    {% for message in messages %}
+    <div id="myAlert" class="alert alert-{{message.tags}}" role="alert">
+        <p>{{message}}</p>
+    </div>
+    <script>
+        setTimeout(() => {
+          document.getElementById('myAlert').style.display = 'none';
+        }, 4000); // 4 seconds in milliseconds
+    </script>
+    {% endfor %}
+
+    <h2 class="login-title" style="color: black;">Rigister</h2>
+
+    <form sction="/auth/signup/" method="post" class="signup-form">
+        {% csrf_token %}
+        <label class="signup-label">Email address</label>
+        <input type="email" class="signup-input" id="email", name="email" required>
+        <label class="signup-label">Password</label>
+        <input type="password" class="signup-input" id="password1", name="password1" required>
+        <label class="signup-label">Retype Password</label>
+        <input type="password" class="signup-input" id="password2", name="password2" required>
+        <button type="submit" class="signup-button" >Sign Up</button>
+    </form>
+    <p class="signup-link">Already have an account? <a href="/auth/login/">Log in here</a></p>
+  </div>
+
+
+{% endblock hero %}

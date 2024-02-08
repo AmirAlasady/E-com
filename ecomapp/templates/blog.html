@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} blog {% endblock title %}
+
+{% block Hero %}
+
+  <section id="hero">
+    <div class="hero-container">
+      <h1>Blog</h1>
+    </div>
+  </section>
+  {% endblock Hero %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">  <div class="comment-form-container">
+        <h2>Share Your Thoughts</h2>
+        <form action="/blog/" method="post">
+          {% csrf_token %}
+
+          <div class="comment-input-wrapper">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write your comment here..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-8">  <div class="posts-container">
+        <h2>Posts</h2>
+        {% for obj in objs %}
+          <div class="post">
+            <h3>{{ obj.content }}</h3>
+            <p>By {{ obj.author }}</p>
+            <p>Published on: {{ obj.date_posted }}</p>
+            <hr>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
